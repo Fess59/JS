@@ -1,4 +1,8 @@
-﻿//Внешение
+﻿import { default as React } from "react";
+import { default as ReactDOM } from "react-dom";
+import { default as Remarkable } from "remarkable";
+
+//Внешение
 export { default as React } from "react";
 export { default as ReactDOM } from "react-dom";
 

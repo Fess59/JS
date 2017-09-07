@@ -1,6 +1,9 @@
-﻿import * as DCT from "DCT";
-import { React } from "Global";
-import { CommentList, CommentInput } from "Forms";
+﻿"use strict";
+import * as DCT from "DCT";
+import React  from "react";
+import { CommentList } from "./CommentList";
+import { CommentInput } from "./CommentInput";
+
 
 export class CommentForm extends React.Component {
     constructor(props) {
@@ -44,8 +47,8 @@ export class CommentForm extends React.Component {
     render() {
         return DCT.Execute(() => {
             return (
-                <div>
-                    <h1>Comments</h1>
+                <div> 
+                    <h1>Comments 676</h1>
                     <CommentList data={this.state.data} />
                     <CommentInput onCommentSubmit={this.handleCommentSubmit} />
                 </div>
