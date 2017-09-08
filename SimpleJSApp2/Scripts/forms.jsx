@@ -1,8 +1,10 @@
-﻿import { default as CommentForm } from './components/CommentBlock/CommentForm';
+﻿import { default as App } from './components/App';
+export { App } from "./components/App";
+
+import { default as CommentForm } from './components/CommentBlock/CommentForm';
 import { default as CommentList } from './components/CommentBlock/CommentList';
 import { default as CommentInput } from './components/CommentBlock/CommentInput';
 import { default as CommentItem } from './components/CommentBlock/CommentItem';
-
 
 export { CommentForm } from "./components/CommentBlock/CommentForm";
 export { CommentList } from "./components/CommentBlock/CommentList";

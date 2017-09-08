@@ -1,4 +1,4 @@
-﻿/// <binding AfterBuild='Profile - Development, Run - Development' Clean='Run - Production' ProjectOpened='Hot' />
+/// <binding AfterBuild='Profile - Development, Run - Development' Clean='Run - Production' />
 "use strict";
 
 var webpack = require('webpack');
@@ -8,7 +8,7 @@ var isProduction = process.env.NODE_ENV === 'production ';
 var jsxLoaders = isProduction ?
     ["babel-loader"] :
     ["react-hot-loader", "babel-loader"]; // only react hot load in debug build
-var entryPoint = './Scripts/app.jsx';
+var entryPoint = './Scripts/index.jsx';
 var app = isProduction ? [entryPoint] : [
     'webpack-dev-server/client?http://0.0.0.0:3000', // WebpackDevServer host and port
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
