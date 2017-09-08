@@ -1,6 +1,6 @@
 ﻿import * as DCT from "DCT";
 import { React } from "Global";
-import { CommentForm, ProductList } from "Forms";
+import { CommentForm, ProductList, ValidationForm, ValidationForm2 } from "Forms";
 
 const propsValues = {
     title: "Список смартфонов",
@@ -22,6 +22,8 @@ export class App extends React.Component {
         return DCT.Execute(() => {
             return (
                 <div>
+                    <ValidationForm />
+                    <ValidationForm2 />
                     <CommentForm url="/comments" submitUrl="/comments/new" pollInterval={2000} />
                     <ProductList data={propsValues} />
                 </div>
