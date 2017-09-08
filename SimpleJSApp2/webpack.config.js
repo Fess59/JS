@@ -1,17 +1,13 @@
-/// <binding AfterBuild='Profile - Development, Run - Development' Clean='Run - Production' />
+/// <binding AfterBuild='Run - Development' Clean='Run - Production' ProjectOpened='Hot' />
 "use strict";
 
 var webpack = require('webpack');
 var path = require('path');
-var outFolder = path.resolve(__dirname, "./wwwroot/js");
 var isProduction = process.env.NODE_ENV === 'production ';
-var jsxLoaders = isProduction ?
-    ["babel-loader"] :
-    ["react-hot-loader", "babel-loader"]; // only react hot load in debug build
-var entryPoint = './Scripts/index.jsx';
+var entryPoint = './scripts/index.jsx';
 var app = isProduction ? [entryPoint] : [
     'webpack-dev-server/client?http://0.0.0.0:3000', // WebpackDevServer host and port
-    'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
+    'webpack/hot/only-dev-server',
     entryPoint
 ];
 
@@ -20,8 +16,8 @@ module.exports = {
         app: app
     },
     output: {
-        path: outFolder,
-        filename: "bundle.js",
+        path: path.resolve(__dirname, "./wwwroot/app"),
+        filename: "[name].js",
         publicPath: 'http://localhost:3000/static/'
     },
     devtool: "source-map",
@@ -29,19 +25,23 @@ module.exports = {
         loaders: [
             {
                 test: /\.jsx?$/,
+                loader: "react-hot-loader/webpack",
                 exclude: (/(node_modules)/),
-                loader: 'react-hot-loader'
             },
             {
                 test: /\.jsx?$/,
-                exclude: (/(node_modules)/),
                 loader: "babel-loader",
+                exclude: (/node_modules/),
                 query: {
                     presets: ["es2015", "react"]
                 }
-            }
-        ]
+            }]
     },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
+
+    ],
     resolve: {
         extensions: [".webpack.js", ".web.js", ".js", ".jsx"],
         alias: {
@@ -50,9 +50,7 @@ module.exports = {
             Forms: path.resolve(__dirname, "./scripts/forms")
         }
     },
-    plugins: [new webpack.HotModuleReplacementPlugin()],
     devServer: {
-        inline: false,
         headers: { "Access-Control-Allow-Origin": "*" }
     }
 };

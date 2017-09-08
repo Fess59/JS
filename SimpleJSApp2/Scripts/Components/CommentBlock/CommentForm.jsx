@@ -1,8 +1,7 @@
 ﻿"use strict";
 import * as DCT from "DCT";
-import React  from "react";
-import { CommentList } from "./CommentList";
-import { CommentInput } from "./CommentInput";
+import React from "react";
+import { CommentList,CommentInput } from "Forms";
 
 
 export class CommentForm extends React.Component {
@@ -18,10 +17,10 @@ export class CommentForm extends React.Component {
         DCT.Execute(() => {
             var xhr = new XMLHttpRequest();
             xhr.open("get", this.props.url, true);
-            xhr.onload = () => {
+            xhr.onload = function() {
                 var data = JSON.parse(xhr.responseText);
                 this.setState({ data: data });
-            };
+            }.bind(this);
             xhr.send();
         });
     }
@@ -47,8 +46,8 @@ export class CommentForm extends React.Component {
     render() {
         return DCT.Execute(() => {
             return (
-                <div> 
-                    <h1>Comments 676</h1>
+                <div>
+                    <h1>Comments  </h1>
                     <CommentList data={this.state.data} />
                     <CommentInput onCommentSubmit={this.handleCommentSubmit} />
                 </div>
